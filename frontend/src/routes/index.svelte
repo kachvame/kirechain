@@ -30,6 +30,7 @@
     messages = [response, ...messages].slice(0, 10);
   }
 </script>
+
 <style>
     .container {
         display: flex;
@@ -37,8 +38,19 @@
         padding: 1rem;
         margin-left: auto;
         margin-right: auto;
-        width: 512px;
+        max-width: 512px;
     }
+
+    @media (max-width: 420px) {
+        .container {
+            flex-direction: column;
+        }
+
+        :global(.bx--btn) {
+            max-width: none;
+        }
+    }
+
 
     h1 {
         text-align: center;
@@ -51,7 +63,9 @@
 <Header />
 <div class='container'>
   <TextInput placeholder='Start of message' size='xl' bind:value={input} />
-  <Button iconDescription='Go' on:click={handleClick} icon={NextOutline} href='#' kind='secondary'>Generate</Button>
+  <Button iconDescription='Go' on:click={handleClick} icon={NextOutline} href='#' kind='secondary'>
+    Generate
+  </Button>
 </div>
 {#each messages as message}
   <h1>
