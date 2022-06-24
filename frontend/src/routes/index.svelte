@@ -35,6 +35,9 @@
         display: flex;
         justify-content: center;
         padding: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 512px;
     }
 
     h1 {
