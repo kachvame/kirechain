@@ -1,5 +1,8 @@
+github.com/emicklei/dot v0.16.0 h1:7PseyizTgeQ/aSF1eo4LcEfWlQSlzamFZpzY/nMB9EY=
 github.com/emicklei/dot v0.16.0/go.mod h1:DeV7GvQtIw4h2u73RKBkkFdvVAz0D9fzeJrgPW6gy/s=
 github.com/fr3fou/polo v0.0.0-20210928113417-cb8f420220ae h1:tAsrk+YG1aZH6u3Xp1jrcygLRhXtb9mTImjEP1D5SWw=
 github.com/fr3fou/polo v0.0.0-20210928113417-cb8f420220ae/go.mod h1:nLAu/o3wOt0todR0PLG+ITQBEvUpSf/SekPbc8tGVUY=
+github.com/fr3fou/polo v1.0.0 h1:gh7sqBzOKT767UP1qnMSs9OkIEddRpyWP/mroAlMt7c=
+github.com/fr3fou/polo v1.0.0/go.mod h1:nLAu/o3wOt0todR0PLG+ITQBEvUpSf/SekPbc8tGVUY=
 github.com/go-chi/chi/v5 v5.0.7 h1:rDTPXLDHGATaeHvVlLcR4Qe0zftYethFucbjVQ1PxU8=
 github.com/go-chi/chi/v5 v5.0.7/go.mod h1:DslCQbL2OYiznFReuXYUmQ2hGd1aDpCnlMNITLSKoi8=
