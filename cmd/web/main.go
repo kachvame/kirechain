@@ -20,7 +20,7 @@ func main() {
 
 func run() error {
 	order := os.Getenv("ORDER")
-	path := os.Getenv("PATH")
+	path := os.Getenv("ENTRIES_PATH")
 
 	file, err := os.Open(path)
 	if err != nil {

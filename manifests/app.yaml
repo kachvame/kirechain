@@ -38,7 +38,7 @@ spec:
           env:
             - name: ORDER
               value: "1"
-            - name: PATH
+            - name: ENTRIES_PATH
               value: /app/entries.json
 ---
 apiVersion: v1
