@@ -1,6 +1,7 @@
 package web
 
 import (
+	"github.com/go-chi/cors"
 	"net/http"
 
 	"github.com/fr3fou/polo/polo"
@@ -20,6 +21,9 @@ func New(c *polo.Chain) *API {
 		Chain: c,
 	}
 
+	a.Use(cors.Handler(cors.Options{
+		AllowedOrigins: []string{"*"},
+	}))
 	a.Use(middleware.RequestID)
 	a.Use(middleware.RealIP)
 	a.Use(middleware.Logger)
