@@ -1,0 +1,97 @@
+query GetRepositories(
+    $login: String!,
+    # @genqlient(omitempty: true)
+    $cursor: String
+) {
+    organization(login: $login) {
+        repositories(first: 100, after: $cursor) {
+            nodes {
+                id,
+                name
+            },
+            pageInfo {
+                endCursor,
+                hasNextPage
+            }
+        }
+    },
+}
+
+query GetCommitsOfBranchByAuthor(
+    $owner: String!,
+    $repository: String!,
+    $branch: String!,
+    $emails: [String!]!,
+    # @genqlient(omitempty: true)
+    $cursor: String
+) {
+    repository(owner: $owner, name: $repository) {
+        ref(qualifiedName: $branch) {
+            target {
+                ... on Commit {
+                    history(first: 100, after: $cursor, author: { emails: $emails }) {
+                        nodes {
+                            ...CommitNode
+                        },
+                        pageInfo {
+                            endCursor,
+                            hasNextPage
+                        },
+                        totalCount
+                    }
+                }
+            }
+        }
+    }
+}
+
+fragment CommitNode on Commit {
+    author {
+        name,
+        email
+    },
+    message
+}
+
+query GetPRs(
+    $owner: String!,
+    $repository: String!,
+    # @genqlient(omitempty: true)
+    $cursor: String
+) {
+    repository(owner: $owner, name: $repository) {
+        pullRequests(first: 100, after: $cursor) {
+            nodes {
+                number
+            },
+            pageInfo {
+                endCursor,
+                hasNextPage
+            }
+        }
+    }
+}
+
+query GetCommitsInPR(
+    $owner: String!,
+    $repository: String!,
+    $number: Int!,
+    # @genqlient(omitempty: true)
+    $cursor: String,
+) {
+    repository(owner: $owner, name: $repository) {
+        pullRequest(number: $number) {
+            commits(first: 100, after: $cursor) {
+                nodes {
+                    commit {
+                        ...CommitNode
+                    }
+                },
+                pageInfo {
+                    endCursor,
+                    hasNextPage
+                }
+            }
+        }
+    }
+}
