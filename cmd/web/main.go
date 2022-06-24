@@ -24,7 +24,7 @@ func run() error {
 
 	file, err := os.Open(path)
 	if err != nil {
-		return fmt.Errorf("failed opening entries, %w", err)
+		return fmt.Errorf("failed opening entries file, %w", err)
 	}
 
 	orderNumber, err := strconv.Atoi(order)
@@ -39,6 +39,12 @@ func run() error {
 			log.Println(fmt.Errorf("failed to build chain, %w", err))
 			os.Exit(1)
 		}
+
+		if err := file.Close(); err != nil {
+			log.Println(fmt.Errorf("failed to close entries file, %w", err))
+			os.Exit(1)
+		}
+
 		h.Chain = &ch
 	}()
 
