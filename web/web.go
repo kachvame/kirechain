@@ -6,6 +6,7 @@ import (
 	"github.com/fr3fou/polo/polo"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/render"
 )
 
 type API struct {
@@ -34,27 +35,21 @@ func New(c *polo.Chain) *API {
 func (a *API) gen(w http.ResponseWriter, r *http.Request) {
 	in := r.URL.Query().Get("in")
 	if in != "" {
-		w.Write([]byte(a.Chain.NextUntilEnd(in)))
-		w.WriteHeader(200)
-		return
+		render.PlainText(w, r, a.Chain.NextUntilEnd(in))
 	} else {
-		w.Write([]byte(a.Chain.NextUntilEnd(a.Chain.RandomState())))
-		w.WriteHeader(200)
-		return
+		render.PlainText(w, r, a.Chain.NextUntilEnd(a.Chain.RandomState()))
 	}
 }
 
 func (a *API) healthy(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("ok"))
-	w.WriteHeader(200)
+	render.PlainText(w, r, "ok")
 }
 
 func (a *API) ready(w http.ResponseWriter, r *http.Request) {
 	if a.Chain != nil {
-		w.Write([]byte("ready"))
-		w.WriteHeader(200)
+		render.PlainText(w, r, "chain is ready")
 		return
 	}
-	w.Write([]byte("chain not built yet"))
-	w.WriteHeader(503)
+	render.Status(r, 503)
+	render.PlainText(w, r, "chain is not ready")
 }

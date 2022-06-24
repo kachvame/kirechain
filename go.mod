@@ -7,4 +7,7 @@ require (
 	github.com/go-chi/chi/v5 v5.0.7
 )
 
-require github.com/emicklei/dot v0.16.0 // indirect
+require (
+	github.com/emicklei/dot v0.16.0 // indirect
+	github.com/go-chi/render v1.0.1 // indirect
+)
