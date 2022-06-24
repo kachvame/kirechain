@@ -31,30 +31,41 @@
   }
 </script>
 
-<style>
+<style lang='scss'>
+  @import '@carbon/colors';
+
+  .container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 512px;
+  }
+
+  @media (max-width: 420px) {
     .container {
-        display: flex;
-        justify-content: center;
-        padding: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 512px;
+      flex-direction: column;
     }
 
-    @media (max-width: 420px) {
-        .container {
-            flex-direction: column;
-        }
-
-        :global(.bx--btn) {
-            max-width: none;
-        }
+    :global(.bx--btn) {
+      max-width: none;
     }
+  }
 
 
-    h1 {
-        text-align: center;
-    }
+  h1 {
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+
+  .divider {
+    height: 2px;
+    width: 100%;
+    background: $gray-80;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 </style>
 
 <svelte:head>
@@ -71,4 +82,5 @@
   <h1>
     {message}
   </h1>
+  <div class='divider' />
 {/each}
