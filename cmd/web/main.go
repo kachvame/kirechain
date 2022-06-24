@@ -49,7 +49,7 @@ func run() error {
 	}()
 
 	addr := ":8080"
-	log.Println("kachvam na ", addr)
+	log.Println("kachvam na", addr)
 	if err := http.ListenAndServe(addr, h); err != nil {
 		return err
 	}
