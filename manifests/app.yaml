@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kirechain-deployment
+  namespace: kirechain
+spec:
+  selector:
+    matchLabels:
+      app: kirechain
+  template:
+    metadata:
+      labels:
+        app: kirechain
+    spec:
+      containers:
+        - image: ghcr.io/kachvame/kirechain
+          name: kirechain
+          livenessProbe:
+            httpGet:
+              path: /healthy/ready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /healthy
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ORDER
+              value: "1"
+            - name: PATH
+              value: /app/entries.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kirechain-service
+  namespace: kirechain
+spec:
+  selector:
+    app: kirechain
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
