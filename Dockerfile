@@ -14,7 +14,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o app
+RUN go build -o app ./cmd/web
 
 FROM alpine:latest as certs
 
@@ -26,5 +26,6 @@ COPY entries.json /
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=base app /
 
-ENTRYPOINT ["/app"]
+ENV ENTRIES_PATH /entries.json
 
+ENTRYPOINT ["/app"]
