@@ -17,7 +17,7 @@ spec:
           name: kirechain
           livenessProbe:
             httpGet:
-              path: /healthy/ready
+              path: /ready
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 20
