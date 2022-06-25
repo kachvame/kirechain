@@ -5,6 +5,7 @@ query GetRepositories(
 ) {
     organization(login: $login) {
         repositories(first: 100, after: $cursor) {
+            # @genqlient(flatten: true)
             nodes {
                 ...RepositoryNode
             },
@@ -72,6 +73,7 @@ query GetCommitsInPR(
         pullRequest(number: $number) {
             commits(first: 100, after: $cursor) {
                 nodes {
+                    # @genqlient(flatten: true)
                     commit {
                         ...CommitNode
                     }
@@ -93,6 +95,7 @@ fragment RepositoryNode on Repository {
 fragment History on GitObject {
     ... on Commit {
         history(first: 100, after: $cursor, author: { emails: $emails }) {
+            # @genqlient(flatten: true)
             nodes {
                 ...CommitNode
             },

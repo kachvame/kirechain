@@ -99,77 +99,12 @@ func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnection) 
 // Represents a Git commit part of a pull request.
 type GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommit struct {
 	// The Git commit object
-	Commit GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit `json:"commit"`
+	Commit CommitNode `json:"commit"`
 }
 
 // GetCommit returns GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommit.Commit, and is useful for accessing the field via an interface.
-func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommit) GetCommit() GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit {
+func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommit) GetCommit() CommitNode {
 	return v.Commit
-}
-
-// GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit includes the requested fields of the GraphQL type Commit.
-// The GraphQL type's documentation follows.
-//
-// Represents a Git commit.
-type GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit struct {
-	CommitNode `json:"-"`
-}
-
-// GetAuthor returns GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit.Author, and is useful for accessing the field via an interface.
-func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit) GetAuthor() CommitNodeAuthorGitActor {
-	return v.CommitNode.Author
-}
-
-// GetMessage returns GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit.Message, and is useful for accessing the field via an interface.
-func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit) GetMessage() string {
-	return v.CommitNode.Message
-}
-
-func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit) UnmarshalJSON(b []byte) error {
-
-	if string(b) == "null" {
-		return nil
-	}
-
-	var firstPass struct {
-		*GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit
-		graphql.NoUnmarshalJSON
-	}
-	firstPass.GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit = v
-
-	err := json.Unmarshal(b, &firstPass)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(
-		b, &v.CommitNode)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type __premarshalGetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit struct {
-	Author CommitNodeAuthorGitActor `json:"author"`
-
-	Message string `json:"message"`
-}
-
-func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit) MarshalJSON() ([]byte, error) {
-	premarshaled, err := v.__premarshalJSON()
-	if err != nil {
-		return nil, err
-	}
-	return json.Marshal(premarshaled)
-}
-
-func (v *GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit) __premarshalJSON() (*__premarshalGetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit, error) {
-	var retval __premarshalGetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionNodesPullRequestCommitCommit
-
-	retval.Author = v.CommitNode.Author
-	retval.Message = v.CommitNode.Message
-	return &retval, nil
 }
 
 // GetCommitsInPRRepositoryPullRequestCommitsPullRequestCommitConnectionPageInfo includes the requested fields of the GraphQL type PageInfo.
@@ -401,84 +336,19 @@ func (v *GetRepositoriesOrganization) GetRepositories() GetRepositoriesOrganizat
 // A list of repositories owned by the subject.
 type GetRepositoriesOrganizationRepositoriesRepositoryConnection struct {
 	// A list of nodes.
-	Nodes []GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository `json:"nodes"`
+	Nodes []RepositoryNode `json:"nodes"`
 	// Information to aid in pagination.
 	PageInfo GetRepositoriesOrganizationRepositoriesRepositoryConnectionPageInfo `json:"pageInfo"`
 }
 
 // GetNodes returns GetRepositoriesOrganizationRepositoriesRepositoryConnection.Nodes, and is useful for accessing the field via an interface.
-func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnection) GetNodes() []GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository {
+func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnection) GetNodes() []RepositoryNode {
 	return v.Nodes
 }
 
 // GetPageInfo returns GetRepositoriesOrganizationRepositoriesRepositoryConnection.PageInfo, and is useful for accessing the field via an interface.
 func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnection) GetPageInfo() GetRepositoriesOrganizationRepositoriesRepositoryConnectionPageInfo {
 	return v.PageInfo
-}
-
-// GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository includes the requested fields of the GraphQL type Repository.
-// The GraphQL type's documentation follows.
-//
-// A repository contains the content for a project.
-type GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository struct {
-	RepositoryNode `json:"-"`
-}
-
-// GetId returns GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository.Id, and is useful for accessing the field via an interface.
-func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository) GetId() string {
-	return v.RepositoryNode.Id
-}
-
-// GetName returns GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository.Name, and is useful for accessing the field via an interface.
-func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository) GetName() string {
-	return v.RepositoryNode.Name
-}
-
-func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository) UnmarshalJSON(b []byte) error {
-
-	if string(b) == "null" {
-		return nil
-	}
-
-	var firstPass struct {
-		*GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository
-		graphql.NoUnmarshalJSON
-	}
-	firstPass.GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository = v
-
-	err := json.Unmarshal(b, &firstPass)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(
-		b, &v.RepositoryNode)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type __premarshalGetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository struct {
-	Id string `json:"id"`
-
-	Name string `json:"name"`
-}
-
-func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository) MarshalJSON() ([]byte, error) {
-	premarshaled, err := v.__premarshalJSON()
-	if err != nil {
-		return nil, err
-	}
-	return json.Marshal(premarshaled)
-}
-
-func (v *GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository) __premarshalJSON() (*__premarshalGetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository, error) {
-	var retval __premarshalGetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository
-
-	retval.Id = v.RepositoryNode.Id
-	retval.Name = v.RepositoryNode.Name
-	return &retval, nil
 }
 
 // GetRepositoriesOrganizationRepositoriesRepositoryConnectionPageInfo includes the requested fields of the GraphQL type PageInfo.
@@ -636,7 +506,7 @@ func (v *HistoryCommit) GetHistory() HistoryHistoryCommitHistoryConnection { ret
 // The connection type for Commit.
 type HistoryHistoryCommitHistoryConnection struct {
 	// A list of nodes.
-	Nodes []HistoryHistoryCommitHistoryConnectionNodesCommit `json:"nodes"`
+	Nodes []CommitNode `json:"nodes"`
 	// Information to aid in pagination.
 	PageInfo HistoryHistoryCommitHistoryConnectionPageInfo `json:"pageInfo"`
 	// Identifies the total count of items in the connection.
@@ -644,9 +514,7 @@ type HistoryHistoryCommitHistoryConnection struct {
 }
 
 // GetNodes returns HistoryHistoryCommitHistoryConnection.Nodes, and is useful for accessing the field via an interface.
-func (v *HistoryHistoryCommitHistoryConnection) GetNodes() []HistoryHistoryCommitHistoryConnectionNodesCommit {
-	return v.Nodes
-}
+func (v *HistoryHistoryCommitHistoryConnection) GetNodes() []CommitNode { return v.Nodes }
 
 // GetPageInfo returns HistoryHistoryCommitHistoryConnection.PageInfo, and is useful for accessing the field via an interface.
 func (v *HistoryHistoryCommitHistoryConnection) GetPageInfo() HistoryHistoryCommitHistoryConnectionPageInfo {
@@ -655,71 +523,6 @@ func (v *HistoryHistoryCommitHistoryConnection) GetPageInfo() HistoryHistoryComm
 
 // GetTotalCount returns HistoryHistoryCommitHistoryConnection.TotalCount, and is useful for accessing the field via an interface.
 func (v *HistoryHistoryCommitHistoryConnection) GetTotalCount() int { return v.TotalCount }
-
-// HistoryHistoryCommitHistoryConnectionNodesCommit includes the requested fields of the GraphQL type Commit.
-// The GraphQL type's documentation follows.
-//
-// Represents a Git commit.
-type HistoryHistoryCommitHistoryConnectionNodesCommit struct {
-	CommitNode `json:"-"`
-}
-
-// GetAuthor returns HistoryHistoryCommitHistoryConnectionNodesCommit.Author, and is useful for accessing the field via an interface.
-func (v *HistoryHistoryCommitHistoryConnectionNodesCommit) GetAuthor() CommitNodeAuthorGitActor {
-	return v.CommitNode.Author
-}
-
-// GetMessage returns HistoryHistoryCommitHistoryConnectionNodesCommit.Message, and is useful for accessing the field via an interface.
-func (v *HistoryHistoryCommitHistoryConnectionNodesCommit) GetMessage() string {
-	return v.CommitNode.Message
-}
-
-func (v *HistoryHistoryCommitHistoryConnectionNodesCommit) UnmarshalJSON(b []byte) error {
-
-	if string(b) == "null" {
-		return nil
-	}
-
-	var firstPass struct {
-		*HistoryHistoryCommitHistoryConnectionNodesCommit
-		graphql.NoUnmarshalJSON
-	}
-	firstPass.HistoryHistoryCommitHistoryConnectionNodesCommit = v
-
-	err := json.Unmarshal(b, &firstPass)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(
-		b, &v.CommitNode)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type __premarshalHistoryHistoryCommitHistoryConnectionNodesCommit struct {
-	Author CommitNodeAuthorGitActor `json:"author"`
-
-	Message string `json:"message"`
-}
-
-func (v *HistoryHistoryCommitHistoryConnectionNodesCommit) MarshalJSON() ([]byte, error) {
-	premarshaled, err := v.__premarshalJSON()
-	if err != nil {
-		return nil, err
-	}
-	return json.Marshal(premarshaled)
-}
-
-func (v *HistoryHistoryCommitHistoryConnectionNodesCommit) __premarshalJSON() (*__premarshalHistoryHistoryCommitHistoryConnectionNodesCommit, error) {
-	var retval __premarshalHistoryHistoryCommitHistoryConnectionNodesCommit
-
-	retval.Author = v.CommitNode.Author
-	retval.Message = v.CommitNode.Message
-	return &retval, nil
-}
 
 // HistoryHistoryCommitHistoryConnectionPageInfo includes the requested fields of the GraphQL type PageInfo.
 // The GraphQL type's documentation follows.

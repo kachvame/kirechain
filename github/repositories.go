@@ -19,7 +19,7 @@ func WalkRepositories(ctx context.Context, client graphql.Client, login string, 
 
 		repositories := response.Organization.Repositories
 		for _, repository := range repositories.Nodes {
-			walkFn(repository.RepositoryNode)
+			walkFn(repository)
 		}
 
 		pageInfo := repositories.PageInfo
@@ -53,9 +53,7 @@ func GetAllCommitsOfBranchByAuthor(ctx context.Context, client graphql.Client, o
 		branchHistory := target.(*HistoryCommit).History
 
 		commits := branchHistory.Nodes
-		for _, commit := range commits {
-			allCommits = append(allCommits, commit.CommitNode)
-		}
+		allCommits = append(allCommits, commits...)
 
 		pageInfo := branchHistory.PageInfo
 		if !pageInfo.HasNextPage {
@@ -108,7 +106,7 @@ func GetCommitsInPRByAuthor(ctx context.Context, client graphql.Client, owner st
 
 		commits := response.Repository.PullRequest.Commits
 		for _, commit := range commits.Nodes {
-			commitNode := commit.Commit.CommitNode
+			commitNode := commit.Commit
 
 			isByAuthor := false
 			for _, email := range emails {
