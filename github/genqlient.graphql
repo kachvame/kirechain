@@ -6,8 +6,7 @@ query GetRepositories(
     organization(login: $login) {
         repositories(first: 100, after: $cursor) {
             nodes {
-                id,
-                name
+                ...RepositoryNode
             },
             pageInfo {
                 endCursor,
@@ -27,19 +26,9 @@ query GetCommitsOfBranchByAuthor(
 ) {
     repository(owner: $owner, name: $repository) {
         ref(qualifiedName: $branch) {
+            # @genqlient(flatten: true)
             target {
-                ... on Commit {
-                    history(first: 100, after: $cursor, author: { emails: $emails }) {
-                        nodes {
-                            ...CommitNode
-                        },
-                        pageInfo {
-                            endCursor,
-                            hasNextPage
-                        },
-                        totalCount
-                    }
-                }
+                ...History
             }
         }
     }
@@ -92,6 +81,26 @@ query GetCommitsInPR(
                     hasNextPage
                 }
             }
+        }
+    }
+}
+
+fragment RepositoryNode on Repository {
+    id,
+    name
+}
+
+fragment History on GitObject {
+    ... on Commit {
+        history(first: 100, after: $cursor, author: { emails: $emails }) {
+            nodes {
+                ...CommitNode
+            },
+            pageInfo {
+                endCursor,
+                hasNextPage
+            },
+            totalCount
         }
     }
 }

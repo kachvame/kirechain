@@ -6,12 +6,9 @@ import (
 	"log"
 )
 
-type Repository = GetRepositoriesOrganizationRepositoriesRepositoryConnectionNodesRepository
-type Branch = *GetCommitsOfBranchByAuthorRepositoryRefTargetCommit
-
 var defaultBranches = [...]string{"master", "platform/v1"}
 
-func WalkRepositories(ctx context.Context, client graphql.Client, login string, walkFn func(Repository)) error {
+func WalkRepositories(ctx context.Context, client graphql.Client, login string, walkFn func(RepositoryNode)) error {
 	cursor := ""
 
 	for {
@@ -22,7 +19,7 @@ func WalkRepositories(ctx context.Context, client graphql.Client, login string, 
 
 		repositories := response.Organization.Repositories
 		for _, repository := range repositories.Nodes {
-			walkFn(repository)
+			walkFn(repository.RepositoryNode)
 		}
 
 		pageInfo := repositories.PageInfo
@@ -53,7 +50,7 @@ func GetAllCommitsOfBranchByAuthor(ctx context.Context, client graphql.Client, o
 			return allCommits, nil
 		}
 
-		branchHistory := target.(Branch).History
+		branchHistory := target.(*HistoryCommit).History
 
 		commits := branchHistory.Nodes
 		for _, commit := range commits {

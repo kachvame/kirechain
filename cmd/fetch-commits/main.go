@@ -28,7 +28,7 @@ func main() {
 
 	var messages []string
 
-	err := github.WalkRepositories(ctx, client, "senteca", func(repository github.Repository) {
+	err := github.WalkRepositories(ctx, client, "senteca", func(repository github.RepositoryNode) {
 		log.Println("querying commits for repo", repository.Name)
 
 		commits, err := github.GetCommitsByAuthor(ctx, client, "senteca", repository.Name, emails[:])
