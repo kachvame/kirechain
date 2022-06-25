@@ -38,8 +38,6 @@ spec:
           env:
             - name: ORDER
               value: "1"
-            - name: ENTRIES_PATH
-              value: /entries.json
 ---
 apiVersion: v1
 kind: Service
