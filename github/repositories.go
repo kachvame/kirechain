@@ -164,7 +164,9 @@ func GetCommitsByAuthor(ctx context.Context, client graphql.Client, owner string
 			return err
 		}
 
-		log.Println("got", len(commits), "for PR", number)
+		if len(commits) > 0 {
+			log.Println("got", len(commits), "for PR", number)
+		}
 
 		allCommits = append(allCommits, commits...)
 
