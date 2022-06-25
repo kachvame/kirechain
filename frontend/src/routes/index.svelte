@@ -40,7 +40,6 @@
     padding: 1rem;
     margin-left: auto;
     margin-right: auto;
-    max-width: 512px;
   }
 
   @media (max-width: 420px) {
@@ -66,21 +65,29 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
+  .page {
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 
 <svelte:head>
   <title>kirechain</title>
 </svelte:head>
 <Header />
-<div class='container'>
-  <TextInput placeholder='Start of message' size='xl' bind:value={input} />
-  <Button iconDescription='Go' on:click={handleClick} icon={NextOutline} href='#' kind='secondary'>
-    Generate
-  </Button>
+<div class='page'>
+  <div class='container'>
+    <TextInput placeholder='Start of message' size='xl' bind:value={input} />
+    <Button iconDescription='Go' on:click={handleClick} icon={NextOutline} href='#' kind='secondary'>
+      Generate
+    </Button>
+  </div>
+  {#each messages as message}
+    <h1>
+      {message}
+    </h1>
+    <div class='divider' />
+  {/each}
 </div>
-{#each messages as message}
-  <h1>
-    {message}
-  </h1>
-  <div class='divider' />
-{/each}
