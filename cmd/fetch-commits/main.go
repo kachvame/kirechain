@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Khan/genqlient/graphql"
+	"github.com/kachvame/kirechain/chain"
 	"github.com/kachvame/kirechain/github"
 	"golang.org/x/oauth2"
 	"log"
@@ -52,7 +53,7 @@ func main() {
 		log.Fatalln("failed to open entries.json:", err)
 	}
 
-	if err = json.NewEncoder(file).Encode(map[string]interface{}{"commits": messages}); err != nil {
+	if err = json.NewEncoder(file).Encode(chain.Entries{Commits: messages}); err != nil {
 		log.Fatalln("failed to encode commit messages:", err)
 	}
 
