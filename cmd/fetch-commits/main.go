@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/Khan/genqlient/graphql"
 	"github.com/kachvame/kirechain/chain"
 	"github.com/kachvame/kirechain/github"
@@ -56,6 +55,4 @@ func main() {
 	if err = json.NewEncoder(file).Encode(chain.Entries{Commits: messages}); err != nil {
 		log.Fatalln("failed to encode commit messages:", err)
 	}
-
-	fmt.Println(len(messages))
 }
