@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Khan/genqlient/graphql"
+	"github.com/kachvame/kirechain/github"
 	"golang.org/x/oauth2"
-	"kirechain/github"
 	"log"
 	"os"
 )
