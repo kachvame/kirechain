@@ -8,7 +8,7 @@ import (
 
 var defaultBranches = [...]string{"master", "platform/v1"}
 
-func WalkRepositories(ctx context.Context, client graphql.Client, login string, walkFn func(RepositoryNode)) error {
+func WalkRepositories(ctx context.Context, client graphql.Client, login string, walkFn func(RepositoryNode) error) error {
 	cursor := ""
 
 	for {
@@ -19,7 +19,9 @@ func WalkRepositories(ctx context.Context, client graphql.Client, login string, 
 
 		repositories := response.Organization.Repositories
 		for _, repository := range repositories.Nodes {
-			walkFn(repository)
+			if err := walkFn(repository); err != nil {
+				return err
+			}
 		}
 
 		pageInfo := repositories.PageInfo

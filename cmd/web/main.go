@@ -24,24 +24,24 @@ func run() error {
 
 	file, err := os.Open(path)
 	if err != nil {
-		return fmt.Errorf("failed opening entries file, %w", err)
+		return fmt.Errorf("failed opening entries file: %w", err)
 	}
 
 	orderNumber, err := strconv.Atoi(order)
 	if err != nil {
-		return fmt.Errorf("failed parsing order, %w", err)
+		return fmt.Errorf("failed parsing order: %w", err)
 	}
 
 	h := web.New(nil)
 	go func() {
 		ch, err := chain.New(orderNumber, file)
 		if err != nil {
-			log.Println(fmt.Errorf("failed to build chain, %w", err))
+			log.Println(fmt.Errorf("failed to build chain: %w", err))
 			os.Exit(1)
 		}
 
 		if err := file.Close(); err != nil {
-			log.Println(fmt.Errorf("failed to close entries file, %w", err))
+			log.Println(fmt.Errorf("failed to close entries file: %w", err))
 			os.Exit(1)
 		}
 
