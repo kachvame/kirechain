@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-var defaultBranches = [...]string{"master", "platform/v1"}
 
 func WalkRepositories(ctx context.Context, client graphql.Client, login string, walkFn func(RepositoryNode) error) error {
 	cursor := ""
@@ -136,7 +135,7 @@ func GetCommitsInPRByAuthor(ctx context.Context, client graphql.Client, owner st
 	return allCommits, nil
 }
 
-func GetCommitsByAuthor(ctx context.Context, client graphql.Client, owner string, repository string, emails []string) ([]CommitNode, error) {
+func GetCommitsByAuthor(ctx context.Context, client graphql.Client, owner string, repository string, emails []string, defaultBranches []string) ([]CommitNode, error) {
 	var allCommits []CommitNode
 	for _, branch := range defaultBranches {
 		commits, err := GetAllCommitsOfBranchByAuthor(ctx, client, owner, repository, branch, emails)

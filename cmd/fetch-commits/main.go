@@ -18,6 +18,11 @@ var emails = [...]string{
 	"51754423+kirilsenteca@users.noreply.github.com",
 }
 
+var defaultBranches = [...]string{
+	"master",
+	"platform/v1",
+}
+
 
 func main() {
 	if err := run(); err != nil {
@@ -40,7 +45,7 @@ func run() error {
 	err := github.WalkRepositories(ctx, client, "senteca", func(repository github.RepositoryNode) error {
 		log.Println("querying commits for repo", repository.Name)
 
-		commits, err := github.GetCommitsByAuthor(ctx, client, "senteca", repository.Name, emails[:])
+		commits, err := github.GetCommitsByAuthor(ctx, client, "senteca", repository.Name, emails[:], defaultBranches[:])
 		if err != nil {
 			return fmt.Errorf("failed to get commits for repository %s: %w", repository.Name, err)
 		}
